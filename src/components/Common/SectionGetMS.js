@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
-import { getSubjectById } from "../../service/subjectService"
+import { getSectionClassById } from "../../service/sectionClassService"
 import Loader from "./Loader/Loader"
+
 
 function Cell({ Id }) {
   const [name, setName] = useState("Loading...")
@@ -9,8 +10,8 @@ function Cell({ Id }) {
   useEffect(() => {
     async function fetch() {
       try {
-        const object = await getSubjectById(Id)
-        setName(object.ten_mon)
+        const object = await getSectionClassById(Id)
+        setName(object.ms_lop_hoc_phan)
       } catch (error) {
         setName("Error loading")
       } finally {

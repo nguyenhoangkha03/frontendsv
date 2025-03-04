@@ -1,11 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { login } from '../../service/accountService'
 import backgroundLeft from '../../assets/imgs/background-login-left.jpg'
 import Toast from '../../components/Common/Toast/Toast'
 import logo from '../../assets/imgs/logo.png'
-import refresh from '../../assets/imgs/refresh.png'
-import captcha from '../../assets/imgs/captcha.png'
+import Captcha from "../../components/Common/Captcha/Captcha";
 import './Login.css'
 
 function Login() {
@@ -18,6 +17,8 @@ function Login() {
     const [timeoutId, setTimeoutId] = useState(null)
     const [token, setToken] = useState('')
     const navigate = useNavigate()
+    const usernameRef = useRef(null)
+    const [captchaVerified, setCaptchaVerified] = useState(false)
     
     const handleChange = (e) => {
         setFormData({...formData, [e.target.name]: e.target.value })
@@ -65,8 +66,11 @@ function Login() {
     }
 
     useEffect(() => {
+        usernameRef.current.focus()
+
         return () => clearTimeout(timeoutId);
     }, [timeoutId])
+
 
     return (
         <div class="relative overflow-hidden">
@@ -75,22 +79,25 @@ function Login() {
                     <img src={backgroundLeft} alt="" />
                 </div>
                 <div className="login__right">
-                    <img src={logo} alt="" />
                     <div className="login-container">
+                        <img  src={logo} alt="" />
                         <h1>CỔNG THÔNG TIN SINH VIÊN</h1>
                         <h2>ĐĂNG NHẬP HỆ THỐNG</h2>
-                        <input onChange={handleChange} type="text" name="username" placeholder="Nhập mã sinh viên" />
-                        <input onChange={handleChange} type="text" name="password" placeholder="Nhập mật khẩu" />
+                        <input ref={usernameRef} onChange={handleChange} type="text" name="username" placeholder="Nhập mã sinh viên" />
+                        <input onChange={handleChange} type="password"
+                            onKeyDown={(e) => {
+                                if (e.key === "Enter") {
+                                    handleClick()
+                                }
+                            }}
+                        name="password" placeholder="Nhập mật khẩu" />
                         <div className="check-graduate">
                             <input type="checkbox" value="graduate" id="graduate" />
                             <label for="graduate">Đã tốt nghiệp</label>
                         </div>
                         <div className="captcha">
-                            <input type="text" placeholder="Nhập mã" />
-                            <img src={refresh} alt="" />
-                            <img src={captcha} alt="" />
+                            <Captcha onVerify={setCaptchaVerified} click={handleClick} set={() => setError('Lỗi captcha!')} />
                         </div>
-                        <button onClick={handleClick}>ĐĂNG NHẬP</button>
                     </div>
                 </div>
             </div>

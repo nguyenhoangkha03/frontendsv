@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_URL = 'http://localhost:3333/api/studentStudySection'
+const API_URL = 'https://23tg8v1m-3333.asse.devtunnels.ms/api/studentStudySection'
 
 export const getStudentStudySections = async () => {
     try {
@@ -45,4 +45,13 @@ export const getStudentStudySectionById = async (id) => {
     } catch (error) {
       return null;
     }
+}
+
+export const getStudentStudySectionByIdSemester = async (id) => {
+  try {
+    const response = await axios.get(`${API_URL}/semester/${id}`);
+    return response.data;
+  } catch (error) {
+    return null;
+  }
 }

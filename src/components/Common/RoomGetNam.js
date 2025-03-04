@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { getSubjectById } from "../../service/subjectService"
+import { getRoomById } from "../../service/roomService"
 import Loader from "./Loader/Loader"
 
 function Cell({ Id }) {
@@ -9,8 +9,8 @@ function Cell({ Id }) {
   useEffect(() => {
     async function fetch() {
       try {
-        const object = await getSubjectById(Id)
-        setName(object.ten_mon)
+        const object = await getRoomById(Id)
+        setName(object.ten_phong)
       } catch (error) {
         setName("Error loading")
       } finally {
@@ -23,7 +23,7 @@ function Cell({ Id }) {
   if(loading) {
     return <Loader />
   }
-
+  
   return <span>{name}</span>
 }
 

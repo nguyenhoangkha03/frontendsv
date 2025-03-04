@@ -40,12 +40,13 @@ body {
     align-items: center;
 }
 
-.login__right > img {
+.login-container > img {
     width: 120px;
     margin-top: 20px;
 }
 
 .login-container {
+    margin: auto 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -62,7 +63,6 @@ body {
     1px -1px 0 white,  
     -1px 1px 0 white,  
     1px 1px 0 white;
-    margin-top: 40px;
     width: 260px;
     text-align: center;
 }
@@ -105,9 +105,9 @@ body {
 }
 
 .captcha {
-    display: flex;
+    /* display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-between; */
     width: 100%;
 }
 

@@ -4,6 +4,9 @@ import Home from '../../pages/Home/Home'
 import RegisterSection from '../../pages/RegisterSection/RegisterSection'
 import Profile from '../../pages/Profile/Profile'
 import Schedule from '../../pages/Schedule/Schedule'
+import Result from '../../pages/Result/Result'
+import News from '../../pages/News/News'
+import NotFound from './404/404'
 
 function Layout(){
 
@@ -15,6 +18,10 @@ function Layout(){
                 <Route path='/register-section' element={<RegisterSection />} />
                 <Route path='/profile' element={<Profile />} />
                 <Route path='/schedule' element={<Schedule />} />
+                <Route path='/result' element={<Result />} />
+                <Route path='/news' element={<News />} />
+
+                <Route path='*' element={<NotFound />} />
             </Routes>
         </>
     )

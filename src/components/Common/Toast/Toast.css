@@ -19,6 +19,7 @@
     top: 30px;
     right: 0;
     background-color: red;
+    z-index: 30;
 }
 
 .toast.hide-toast {

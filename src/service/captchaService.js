@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_URL = 'https://23tg8v1m-3333.asse.devtunnels.ms/api/account'
+const API_URL = 'https://23tg8v1m-3333.asse.devtunnels.ms/api/captcha'
 
 export const getAccounts = async () => {
     try {
@@ -8,6 +8,26 @@ export const getAccounts = async () => {
         return response.data
     } catch(err){
         throw new Error('Error getting accounts')
+    }
+}
+
+export const handleVerify = async (input) => {
+    try {
+        const response = await axios.post(`${API_URL}/verify`,
+            { input },
+            { withCredentials: true }
+        )
+        return response.data
+    } catch(err){
+        throw new Error('Error getting accounts')
+    }
+
+    if (response.data.success) {
+      onVerify(true);
+      alert("Captcha hợp lệ!");
+    } else {
+      alert("Captcha sai, thử lại!");
+      fetchCaptcha();
     }
 }
 

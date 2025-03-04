@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_URL = 'http://localhost:3333/api/sectionClass'
+const API_URL = 'https://23tg8v1m-3333.asse.devtunnels.ms/api/sectionClass'
 
 export const getSectionClasses = async () => {
     try {
@@ -56,9 +56,27 @@ export const getAllSectionClassesByIdSemester = async (id) => {
   }
 }
 
+export const getAllSectionClassesByIdSemesterAndNotIdStudent = async (idSemester, idStudent) => {
+  try {
+    const response = await axios.get(`${API_URL}/semester-not-student/${idSemester}/${idStudent}`);
+    return response.data;
+  } catch (error) {
+    return null;
+  }
+}
+
 export const getAllJoinSectionClassesByIdSemesterAndIdStudent = async (idSemester, idStudent) => {
   try {
     const response = await axios.get(`${API_URL}/semester-student/${idSemester}/${idStudent}`);
+    return response.data;
+  } catch (error) {
+    return null;
+  }
+}
+
+export const getAllJoinSectionClassesByIdStudent = async (idStudent) => {
+  try {
+    const response = await axios.get(`${API_URL}/student/${idStudent}`);
     return response.data;
   } catch (error) {
     return null;
